@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Extended Bootstrap Modal sample page</title>
+
+		<!-- Import Jquery -->
+		<script
+		  src="https://code.jquery.com/jquery-1.12.4.min.js"
+		  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		  crossorigin="anonymous"></script>
+
+	  	<!-- Import Bootstrap -->
+	  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Import Extended bootstrap modal plugin -->
+	  	<script src="plugin/extendedBootstrapModal.js"></script>
+
+	  	<script>
+	  		$(document).ready(function()
+	  		{
+	  			ExtendedBoostrapModal({
+			        autoload: true,
+			        id: 'my-modal',
+			        title: 'Sample modal',
+			        addForm: {
+			            id: 'form_id',
+			            name: 'form_name',
+			            inputs: {
+			                label: 'textInput',
+			                list: [
+			                    {
+			                        id: 'input_id',
+			                        name: 'input_name',
+			                        type: 'text',
+			                        value: '',
+			                        placeholder: 'my text input'
+			                    }
+			                ]
+			            },
+			            buttons: [
+			                    {
+			                        value: 'Cancel',
+			                        type: 'button'
+			                    },
+			                    {
+			                        name: 'btn_add',
+			                        value: 'Validate',
+			                        type : 'button',
+			                        class: 'btn-success',
+			                        callback: 'my_callback_fct',
+			                        arguments : ['arg1', 'arg2']
+			                    }
+			            ],
+			            radios : {
+			                label : 'radios',
+			                list: [
+			                    {
+			                        name: 'radio_name',
+			                        value: 'choice_1',
+			                        content: 'Choice 1'
+			                    },
+			                    {
+			                        name: 'radio_name',
+			                        value: 'choice_2',
+			                        content: 'Choice 2'
+			                    }
+			                ]
+			            },
+			            checkboxs : {
+			                label : 'checkboxs',
+			                list: [
+			                    {
+			                        name: 'check1',
+			                        content: 'Choice 1'
+			                    },
+			                    {
+			                        name: 'check2',
+			                        content: 'Choice 2'
+			                    }
+			                ]
+			            },
+			            selects: {
+			                label : 'selects',
+			                list : [
+			                    {
+			                        name:"myList",
+			                        options : [
+			                            {
+			                                name: 'opt1',
+			                                value: 'Option 1'
+			                            },
+			                            {
+			                                name: 'opt2',
+			                                value: 'Option 2',
+			                                selected: true
+			                            },
+			                        ],
+			                    }
+			                ]
+			            }
+			        }
+			    });
+	  		});
+
+	  	</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>
