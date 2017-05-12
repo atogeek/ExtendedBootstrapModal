@@ -15,7 +15,7 @@
 	  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		<!-- Import Extended bootstrap modal plugin -->
-	  	<script src="extendedBootstrapModal.js"></script>
+	  	<script src="../plugin/extendedBootstrapModal.js"></script>
 
 	  	<script>
 	  		$(document).ready(function()
@@ -24,6 +24,7 @@
 		        autoload: true,
 		        id: 'modal-addsw',
 		        title: 'Sample modal',
+		        state: 'success',
 		        addForm: {
 		            id: 'form_id',
 		            name: 'form_name',
@@ -53,53 +54,7 @@
 		                        arguments : ['arg1', 'arg2']
 		                    }
 		            ],
-		            radios : {
-		                label : 'radios',
-		                list: [
-		                    {
-		                        name: 'radio_name',
-		                        value: 'choice_1',
-		                        content: 'Choice 1'
-		                    },
-		                    {
-		                        name: 'radio_name',
-		                        value: 'choice_2',
-		                        content: 'Choice 2'
-		                    }
-		                ]
-		            },
-		            checkboxs : {
-		                label : 'checkboxs',
-		                list: [
-		                    {
-		                        name: 'check1',
-		                        content: 'Choice 1'
-		                    },
-		                    {
-		                        name: 'check2',
-		                        content: 'Choice 2'
-		                    }
-		                ]
-		            },
-		            selects: {
-		                label : 'selects',
-		                list : [
-		                    {
-		                        name:"myList",
-		                        options : [
-		                            {
-		                                name: 'opt1',
-		                                value: 'Option 1'
-		                            },
-		                            {
-		                                name: 'opt2',
-		                                value: 'Option 2',
-		                                selected: true
-		                            },
-		                        ],
-		                    }
-		                ]
-		            }
+		         
 		        }
 		    });
 	  		});

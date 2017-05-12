@@ -9,3 +9,38 @@ table {
 input[type=radio], input[type=checkbox] {
     margin-right: 20px;
 }
+
+.modal-header{
+	padding:9px 15px;
+    border-bottom:1px solid #eee;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.modal-footer {
+    padding: 8px;
+}
+
+.custom-header{
+	color:#fff;
+}
+
+.header-success {
+    background-color: #5cb85c;
+}
+.header-warning {
+    background-color: #f0ad4e;
+}
+.header-danger {
+    background-color: #d9534f;
+}
+.header-info {
+    background-color: #5bc0de;
+}
+.header-primary {
+    background-color: #428bca;
+}

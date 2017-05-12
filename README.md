@@ -36,6 +36,17 @@ ExtendedBoostrapModal('Simple modal without any parameters');
 ```
 ![MacDown Screenshot](pictures/simple.png)
 
+### Modal state
+You can specify a modal state to change the header color :
+
+* success
+* warning
+* danger
+* info
+* primary
+
+![MacDown Screenshot](pictures/success.png)
+
 ### Complex modal
 The plugin become a powerfull tools when you want to generate complex modal with many HTML components.
 

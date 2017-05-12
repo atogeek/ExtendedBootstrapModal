@@ -12,13 +12,17 @@ function ExtendedBoostrapModal(params)
     this.init = function ()
     {
         // Properties
-        this.cssPath = "plugin/extendedBootstrapModal.css";
+        this.cssPath = "../plugin/extendedBootstrapModal.css";
         this.modal = '<div>';
         this.id = params.id || 'no_id';
         this.title = params.title || 'Caution';
+        this.state = params.state;
 
         // Add css file
         this.addCss();
+
+        // Remove existing modal if exist
+        this.removeExistingModal();
 
         // Create modal
         this.generateBootstrapModal();
@@ -28,6 +32,11 @@ function ExtendedBoostrapModal(params)
             // Add a simple text
             if (params.addText) {
                 this.addText(params.addText);
+            }
+
+            // Add a row
+            if (params.addRows) {
+                this.addRows(params.addRows);
             }
 
             // Add a form
@@ -52,15 +61,28 @@ function ExtendedBoostrapModal(params)
     };
 
     /**
+     * Remove existing modal with same id
+     */
+    this.removeExistingModal = function()
+    {
+        if ($('#' + this.id).length != null) {
+            $('#' + this.id).remove();
+        }
+    }
+
+    /**
      * Generate an empty bootstrap modal template
      */
     this.generateBootstrapModal = function ()
     {
+        // Css header
+        var header = (typeof params.state == 'undefined') ? '' : 'custom-header';
+
         var modal = $('' +
             '<div id="' + this.id + '" class="modal fade" id="modal-add" role="dialog">' +
                 '<div class="modal-dialog">' +
                     '<div class="modal-content">' +
-                        '<div class="modal-header">' +
+                        '<div class="modal-header ' + header + ' header-' + state + '">' +
                             '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
                             '<h4 class="modal-title">' + this.title + '</h4>' +
                         '</div>' +
@@ -99,6 +121,29 @@ function ExtendedBoostrapModal(params)
     {
         $(this.modal).append(data);
     };
+
+    /**
+    * Add a bootstrap row
+    * @param data
+    */
+    this.addRows = function (data)
+    {
+        var div = $('<div>');
+
+        data.forEach(function(row){
+            div.append('<p class="subTitle">' + row.value+ '</p>');
+            var divRow= $('<div class="row">');
+
+            row.list.forEach(function(column){
+                var divCol= $('<div class="col-md-' + parseInt(12 / row.columns) + '">');
+                divCol.append(column);
+                divRow.append(divCol);
+            })
+            div.append(divRow);
+        });
+
+        $(this.body).append(div);
+    }
 
     /**
      * Generate html form
