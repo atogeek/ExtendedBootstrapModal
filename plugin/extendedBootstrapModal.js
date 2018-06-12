@@ -11,15 +11,13 @@ function ExtendedBoostrapModal(params)
      */
     this.init = function ()
     {
-        // Properties
-        this.cssPath = "../plugin/extendedBootstrapModal.css";
-        this.modal = '<div>';
-        this.id = params.id || 'no_id';
-        this.title = params.title || 'Caution';
-        this.state = params.state;
-
         // Add css file
         this.addCss();
+
+        // Properties
+        this.modal = '<div>';
+        this.id = params.id || 'no_id';
+        this.title = params.title || 'Attention';
 
         // Remove existing modal if exist
         this.removeExistingModal();
@@ -32,11 +30,6 @@ function ExtendedBoostrapModal(params)
             // Add a simple text
             if (params.addText) {
                 this.addText(params.addText);
-            }
-
-            // Add a row
-            if (params.addRows) {
-                this.addRows(params.addRows);
             }
 
             // Add a form
@@ -57,7 +50,7 @@ function ExtendedBoostrapModal(params)
      */
     this.addCss = function ()
     {
-        $('head').append('<link rel="stylesheet" type="text/css" href="' + this.cssPath + '">');
+        $('head').append('<link rel="stylesheet" type="text/css" href="/vendor/modal/modal.css">');
     };
 
     /**
@@ -75,14 +68,11 @@ function ExtendedBoostrapModal(params)
      */
     this.generateBootstrapModal = function ()
     {
-        // Css header
-        var header = (typeof params.state == 'undefined') ? '' : 'custom-header';
-
         var modal = $('' +
             '<div id="' + this.id + '" class="modal fade" id="modal-add" role="dialog">' +
                 '<div class="modal-dialog">' +
                     '<div class="modal-content">' +
-                        '<div class="modal-header ' + header + ' header-' + state + '">' +
+                        '<div class="modal-header">' +
                             '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
                             '<h4 class="modal-title">' + this.title + '</h4>' +
                         '</div>' +
@@ -123,29 +113,6 @@ function ExtendedBoostrapModal(params)
     };
 
     /**
-    * Add a bootstrap row
-    * @param data
-    */
-    this.addRows = function (data)
-    {
-        var div = $('<div>');
-
-        data.forEach(function(row){
-            div.append('<p class="subTitle">' + row.value+ '</p>');
-            var divRow= $('<div class="row">');
-
-            row.list.forEach(function(column){
-                var divCol= $('<div class="col-md-' + parseInt(12 / row.columns) + '">');
-                divCol.append(column);
-                divRow.append(divCol);
-            })
-            div.append(divRow);
-        });
-
-        $(this.body).append(div);
-    }
-
-    /**
      * Generate html form
      * @param data
      */
@@ -160,7 +127,7 @@ function ExtendedBoostrapModal(params)
 
                 // Create div container
                 var div = this.createContainer(data.inputs.label);
-                var divText = $('<div class="col-sm-10">');
+                var divText = $('<div class="col-sm-12">');
 
                 data.inputs.list.forEach(function (input) {
                     self.CreateInput(divText, input);
@@ -253,19 +220,29 @@ function ExtendedBoostrapModal(params)
      */
     this.CreateInput = function (div, input)
     {
+        var label = (input.label) ? input.label : '';
+
         // Create the input cell
         var required = (input.required) ? 'required' : '';
         var type = (typeof input.type !== 'undefined') ? input.type : 'text';
         var pattern = (typeof input.pattern !== 'undefined') ? 'pattern="' + input.pattern + '"' : '';
+        var value = (typeof input.value !== 'undefined') ? input.value : '';
+        var maxlength = (typeof input.maxlength !== 'undefined') ? 'maxlength="'+input.maxlength+'"' : '';
 
         // Text input
-        var text = $("<input type='" + type + "' id='" + input.id + "' name='" + input.name + "' class='form-control'" +
-            "placeholder='" + input.placeholder + "' " + required + " " + pattern + "/>");
+        var text = $("" +
+            "<div class='form-group'>"
+            + "<label class='col-xs-2 control-label' for='"+input.id+"'>"
+            +label+"</label>"
+            +"<div class='col-xs-10'><input type='" + type + "' id='" + input.id + "' name='" + input.name + "' class='form-control'"
+            +"placeholder='" + input.placeholder + "' value='"+value+"' " + required + " " + pattern + " " + maxlength + "/></div>" +
+            "</div>"
+        );
 
         // Check the input's validity
         text[0].addEventListener('invalid', function (e) {
             if (text[0].validity.valueMissing) {
-                e.target.setCustomValidity("The field should not be empty");
+                e.target.setCustomValidity("Le champs doit être rempli");
             } else if (text[0].validity.patternMismatch == true) {
                 e.target.setCustomValidity(input.errorMessage);
             }
@@ -396,7 +373,6 @@ function ExtendedBoostrapModal(params)
                     arguments = "'" + button.arguments.join("','") + "'";
                 }
             }
-
             // Add callback action
             action = button.callback + '(' + arguments + ')';
         }
@@ -424,6 +400,13 @@ function ExtendedBoostrapModal(params)
         return div;
     };
 
+    /**
+     * hide modal
+     */
+    this.hideModal = function()
+    {
+        $('#'+this.id).modal('hide');
+    };
     // Create modal
     this.init();
 }
