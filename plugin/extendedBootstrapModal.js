@@ -260,7 +260,7 @@ function ExtendedBoostrapModal(params)
 
         // Text input
         var text = $("<input type='" + type + "' id='" + input.id + "' name='" + input.name + "' class='form-control'" +
-            "placeholder='" + input.placeholder + "' " + required + " " + pattern + "/>");
+            "placeholder='" + input.placeholder + "' value='" + input.value + "'" + required + " " + pattern + "/>");
 
         // Check the input's validity
         text[0].addEventListener('invalid', function (e) {
